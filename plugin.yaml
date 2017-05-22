@@ -1,0 +1,25 @@
+plugin:
+    name: 'octommerce.wallet::lang.name'
+    description: 'octommerce.wallet::lang.description'
+    author: 'Octommerce'
+    icon: icon-money
+    homepage: 'http://octommerce.com'
+navigation:
+    wallet:
+        label: Wallet
+        url: octommerce/wallet/transactions
+        icon: icon-money
+        permissions:
+            - octommerce.wallet.*
+        order: '400'
+        sideMenu:
+            transactions:
+                label: Tansactions
+                url: octommerce/wallet/transactions
+                icon: icon-exchange
+                permissions:
+                    - octommerce.wallet.access_transactions
+permissions:
+    octommerce.wallet.access_transactions:
+        tab: Transactions
+        label: 'Access Transactions'

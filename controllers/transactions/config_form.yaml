@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Transaction
+
+# Model Form Field configuration
+form: $/octommerce/wallet/models/transaction/fields.yaml
+
+# Model Class name
+modelClass: Octommerce\Wallet\Models\Transaction
+
+# Default redirect location
+defaultRedirect: octommerce/wallet/transactions
+
+# Create page
+create:
+    title: Create Transaction
+    redirect: octommerce/wallet/transactions/update/:id
+    redirectClose: octommerce/wallet/transactions
+
+# Update page
+update:
+    title: Edit Transaction
+    redirect: octommerce/wallet/transactions
+    redirectClose: octommerce/wallet/transactions
+
+# Preview page
+preview:
+    title: Preview Transaction
