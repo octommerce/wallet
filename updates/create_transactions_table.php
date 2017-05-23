@@ -16,19 +16,29 @@ class CreateTransactionsTable extends Migration
             $table->decimal('previous_amount', 12, 2)->unsigned()->default(0);
             $table->decimal('updated_amount', 12, 2)->unsigned();
             $table->decimal('amount', 12, 2);
-            $table->text('source_type')->nullable();
+            $table->string('related_type')->nullable();
+            $table->integer('related_id')->nullable()->unsigned();
             $table->string('status');
             $table->timestamps();
         });
 
-        if (Schema::hasColumns('users', ['credit_balance', 'credit_updated_at'])) {
+        if (Schema::hasColumns('orders', ['wallet_used'])) {
+            return;
+        }
+
+        Schema::table('octommerce_octommerce_orders', function($table)
+        {
+            $table->decimal('wallet_used', 12, 2)->unsigned()->nullable()->after('total');
+        });
+
+        if (Schema::hasColumns('users', ['wallet_balance', 'wallet_updated_at'])) {
             return;
         }
 
         Schema::table('users', function($table)
         {
-            $table->decimal('credit_balance', 12, 2)->unsigned()->nullable();
-            $table->timestamp('credit_updated_at')->nullable();
+            $table->decimal('wallet_balance', 12, 2)->unsigned()->nullable();
+            $table->timestamp('wallet_updated_at')->nullable();
         });
     }
 
@@ -36,9 +46,13 @@ class CreateTransactionsTable extends Migration
     {
         Schema::dropIfExists('octommerce_wallet_transactions');
 
+        Schema::table('octommerce_octommerce_orders', function($table) {
+            $table->dropColumn('wallet_used');
+        });
+
         Schema::table('users', function($table) {
-            $table->dropColumn('credit_balance');
-            $table->dropColumn('credit_updated_at');
+            $table->dropColumn('wallet_balance');
+            $table->dropColumn('wallet_updated_at');
         });
     }
 }
