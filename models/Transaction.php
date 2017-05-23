@@ -17,7 +17,7 @@ class Transaction extends Model
     /**
      * @var array Guarded fields
      */
-    protected $guarded = ['*'];
+    protected $guarded = ['previous_amount', 'updated_amount'];
 
     /**
      * @var array Fillable fields
@@ -41,12 +41,19 @@ class Transaction extends Model
     public $attachOne = [];
     public $attachMany = [];
 
-    public function afterCreate()
+    public function beforeCreate()
     {
         $user = $this->user;
 
-        $user->credit_balance = $this->amount;
-        $user->credit_updated_at = Carbon::now();
+        $this->previous_amount = $user->wallet_balance;
+        $this->updated_amount = $user->wallet_balance + $this->amount;
+
+        if ($this->updated_amount < 0) {
+            throw new ApplicationException('Balance not sufficient.');
+        }
+
+        $user->wallet_balance = $this->updated_amount;
+        $user->wallet_updated_at = Carbon::now();
         $user->save();
     }
 

@@ -27,6 +27,6 @@ class MyWallet extends ComponentBase
 
         $this->balance = $user->wallet_balance;
 
-        $this->transactions = $user->wallet_transactions;
+        $this->transactions = $user->wallet_transactions()->orderBy('created_at', 'desc')->get();
     }
 }
