@@ -1,5 +1,6 @@
 <?php namespace Octommerce\Wallet;
 
+use RainLab\User\Models\User;
 use System\Classes\PluginBase;
 
 /**
@@ -14,5 +15,19 @@ class Plugin extends PluginBase
         return [
             'Octommerce\Wallet\Components\MyWallet' => 'myWallet',
         ];
+    }
+
+    public function boot()
+    {
+        User::extend(function ($model) {
+            $model->hasMany['wallet_transactions'] = 'Octommerce\Wallet\Models\Transaction';
+        });
+
+        Order::extend(function ($model) {
+            $model->morphOne['transaction'] = [
+                'Octommerce\Wallet\Models\Transaction',
+                'name' => 'related',
+            ];
+        });
     }
 }

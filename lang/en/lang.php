@@ -1,6 +1,6 @@
 <?php return [
     'plugin' => [
         'name' => 'Wallet',
-        'description' => ''
+        'description' => 'Wallet feature to easier checkout.'
     ]
 ];
