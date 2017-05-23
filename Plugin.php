@@ -2,6 +2,7 @@
 
 use RainLab\User\Models\User;
 use System\Classes\PluginBase;
+use Octommerce\Octommerce\Models\Order;
 
 /**
  * Shipping Plugin Information File
