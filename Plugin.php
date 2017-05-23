@@ -8,4 +8,11 @@ use System\Classes\PluginBase;
 class Plugin extends PluginBase
 {
     public $require = ['Octommerce.Octommerce'];
+
+    public function registerComponents()
+    {
+        return [
+            'Octommerce\Wallet\Components\MyWallet' => 'myWallet',
+        ];
+    }
 }
