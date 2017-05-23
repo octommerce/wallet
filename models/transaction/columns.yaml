@@ -6,3 +6,7 @@ columns:
     id:
         label: ID
         searchable: true
+    description:
+        label: Description
+    amount:
+        label: Amount

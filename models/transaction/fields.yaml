@@ -6,6 +6,16 @@ fields:
     user:
         label: User
         type: recordfinder
+        list: $/rainlab/user/models/user/columns.yaml
+        prompt: Click the %s button to find a user
+        nameFrom: name
+        descriptionFrom: email
+        span: auto
     amount:
         label: Amount
         type: number
+        span: auto
+    description:
+        label: Description
+        type: textarea
+        span: auto
