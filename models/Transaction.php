@@ -45,7 +45,7 @@ class Transaction extends Model
     {
         $user = $this->user;
 
-        $this->previous_amount = $user->wallet_balance;
+        $this->previous_amount = $user->wallet_balance ?: 0;
         $this->updated_amount = $user->wallet_balance + $this->amount;
 
         if ($this->updated_amount < 0) {
