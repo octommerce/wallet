@@ -24,6 +24,9 @@ class CheckoutWallet extends ComponentBase
     {
         $user = Auth::getUser();
 
+        if (!$user)
+            return redirect('/login');
+
         $this->maxBalance = $user->wallet_balance;
     }
 }
