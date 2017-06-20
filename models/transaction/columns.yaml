@@ -6,7 +6,18 @@ columns:
     id:
         label: ID
         searchable: true
+    user:
+        label: User
+        relation: user
+        select: name
     description:
         label: Description
     amount:
+        type: currency
         label: Amount
+    previous_amount:
+        type: currency
+        label: Previous Amount
+    updated_amount:
+        type: currency
+        label: Current Amount
