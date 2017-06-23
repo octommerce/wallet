@@ -49,7 +49,7 @@ class Transaction extends Model
         $this->updated_amount = $user->wallet_balance + $this->amount;
 
         if ($this->updated_amount < 0) {
-            throw new ApplicationException('Balance not sufficient.');
+            throw new \ApplicationException('Balance not sufficient.');
         }
 
         $user->wallet_balance = $this->updated_amount;
